@@ -77,6 +77,23 @@ public class EndangeredAnimalTest {
         animal.save();
         assertEquals(EndangeredAnimal.all().get(0), animal);
     }
+    @Test
+    public void find_ReturnAnimalBasedOnId(){
+        EndangeredAnimal animal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
+        EndangeredAnimal animalTwo = new EndangeredAnimal("def", "old","NE Wing","okay", 1);
+        animal.save();
+        animalTwo.save();
+        assertEquals(EndangeredAnimal.find(animalTwo.getId()), animalTwo);
+    }
+    @Test
+    public void assignLocationToAnimal(){
+        Sighting sighting = new Sighting("lower quad", "adult");
+        sighting.save();
+        EndangeredAnimal animal = new EndangeredAnimal("deez nuts","youug","lower quad","healthy",1);
+        animal.save();
+        EndangeredAnimal foundAnimal = EndangeredAnimal.find(animal.getId());
+        assertEquals(foundAnimal.getLocation(), sighting.getLocation());
+    }
 
 
 }
