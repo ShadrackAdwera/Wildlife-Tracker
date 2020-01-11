@@ -1,6 +1,9 @@
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class EndangeredAnimalTest {
@@ -94,7 +97,17 @@ public class EndangeredAnimalTest {
         EndangeredAnimal foundAnimal = EndangeredAnimal.find(animal.getId());
         assertEquals(foundAnimal.getLocation(), sighting.getLocation());
     }
-
+    @Test
+    public void recordsTimeSpottedInTheDatabase(){
+        EndangeredAnimal animal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
+        EndangeredAnimal animalTwo = new EndangeredAnimal("def", "old","NE Wing","okay", 1);
+        animal.save();
+        animalTwo.save();
+        Timestamp savedLastSeen = EndangeredAnimal.find(animal.getId()).getLastSeen();
+        Timestamp rightNow = new Timestamp(new Date().getTime());
+        assertEquals(rightNow.getDay(), savedLastSeen.getDay());
+    }
 
 }
+
 

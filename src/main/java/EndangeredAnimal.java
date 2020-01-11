@@ -18,6 +18,7 @@ public class EndangeredAnimal extends Animal {
         this.rangerId = rangerId;
         timer = new Timer();
         type = DATABASE_TYPE;
+        this.located = false;
     }
    public static List<EndangeredAnimal> all(){
         try(Connection con = DB.sql2o.open()) {

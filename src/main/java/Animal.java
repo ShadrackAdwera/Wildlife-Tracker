@@ -3,6 +3,7 @@ import org.sql2o.Connection;
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Animal {
     protected String name;
@@ -14,6 +15,7 @@ public abstract class Animal {
     protected Timestamp lastSeen;
     protected Timer timer;
     protected String type;
+    protected boolean located;
 
 
     public static final String HEALTH_ILL = "ill";
@@ -101,7 +103,15 @@ public abstract class Animal {
         return rangerId;
     }
 
-   public void save(){
+    public Timestamp getLastSeen() {
+        return lastSeen;
+    }
+
+    public boolean isLocated() {
+        return located;
+    }
+
+    public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO animals (name, age, location, healthstatus, rangerid, lastseen, type) VALUES (:name, :age, :location, :healthstatus, :rangerid, now(), :type)";
             this.id = (int) con.createQuery(sql, true)
