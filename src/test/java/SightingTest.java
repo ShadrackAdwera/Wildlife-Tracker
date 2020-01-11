@@ -61,8 +61,19 @@ public class SightingTest {
         EndangeredAnimal animalTwo = new EndangeredAnimal("koala","young", testSite.getLocation(),"ill",2);
         animalTwo.save();
         EndangeredAnimal[] endangeredAnimals = new EndangeredAnimal[] { animal, animalTwo };
-        assertTrue(testSite.getAnimals().containsAll(Arrays.asList(endangeredAnimals)));
+        assertTrue(Sighting.findByLocation(testSite.getLocation()).containsAll(Arrays.asList(endangeredAnimals)));
+    }
+    @Test
+    public void findByLocation_returnAllAnimalsInALocation(){
+        Sighting testSite = new Sighting("Upper quad", "deez nuts");
+        testSite.save();
+        EndangeredAnimal animal = new EndangeredAnimal("koala","young", testSite.getLocation(),"healthy",1);
+        animal.save();
+        EndangeredAnimal animalTwo = new EndangeredAnimal("koala","young", testSite.getLocation(),"ill",2);
+        animalTwo.save();
+        assertEquals(2, Sighting.findByLocation(testSite.getLocation()).size());
     }
 
 }
+
 

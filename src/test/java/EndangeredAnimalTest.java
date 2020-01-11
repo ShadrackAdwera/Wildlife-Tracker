@@ -1,9 +1,6 @@
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import static org.junit.Assert.*;
 
 public class EndangeredAnimalTest {
@@ -22,6 +19,13 @@ public class EndangeredAnimalTest {
         EndangeredAnimal testAnimal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
         assertEquals("abc", testAnimal.getName());
     }
+
+    @Test
+    public void getLocation_savesLocation(){
+        EndangeredAnimal testAnimal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
+        assertEquals("upper quad", testAnimal.getAnimalLocation());
+    }
+
     @Test
     public void getHealthIll_savesHealthStatusAsIll_String() {
         EndangeredAnimal animal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
@@ -92,22 +96,12 @@ public class EndangeredAnimalTest {
     public void assignLocationToAnimal(){
         Sighting sighting = new Sighting("lower quad", "adult");
         sighting.save();
-        EndangeredAnimal animal = new EndangeredAnimal("deez nuts","youug","lower quad","healthy",1);
+        EndangeredAnimal animal = new EndangeredAnimal("deez nuts","youug",sighting.getLocation(),"healthy",1);
         animal.save();
         EndangeredAnimal foundAnimal = EndangeredAnimal.find(animal.getId());
-        assertEquals(foundAnimal.getLocation(), sighting.getLocation());
+        assertEquals(foundAnimal.getAnimalLocation(), sighting.getLocation());
     }
-    @Test
-    public void recordsTimeSpottedInTheDatabase(){
-        EndangeredAnimal animal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
-        EndangeredAnimal animalTwo = new EndangeredAnimal("def", "old","NE Wing","okay", 1);
-        animal.save();
-        animalTwo.save();
-        Timestamp savedLastSeen = EndangeredAnimal.find(animal.getId()).getLastSeen();
-        Timestamp rightNow = new Timestamp(new Date().getTime());
-        assertEquals(rightNow.getDay(), savedLastSeen.getDay());
-    }
+
 
 }
-
 

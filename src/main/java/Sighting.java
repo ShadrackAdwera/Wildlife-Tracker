@@ -27,12 +27,12 @@ public class Sighting {
         Sighting sighting = (Sighting) o;
         return getId() == sighting.getId() &&
                 Objects.equals(getRangerName(), sighting.getRangerName()) &&
-                Objects.equals(location, sighting.location);
+                Objects.equals(getLocation(), sighting.getLocation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRangerName(), getId(), location);
+        return Objects.hash(getRangerName(), getId(), getLocation());
     }
 
     public String getLocation() {
@@ -65,12 +65,20 @@ public class Sighting {
             return sighting;
         }
     }
-    //One to many relationship
-    public List<EndangeredAnimal> getAnimals() {
-        try(Connection con = DB.sql2o.open()) {
-            String sql = "SELECT * FROM animals where location=:location";
+    public static Sighting findLocation(String location){
+        try (Connection con = DB.sql2o.open()){
+            String sql = "SELECT * FROM sightings WHERE location = :location";
             return con.createQuery(sql)
-                    .addParameter("location", this.location)
+                    .addParameter("id", location)
+                    .executeAndFetchFirst(Sighting.class);
+        }
+    }
+    //one to many relationship
+    public static List<EndangeredAnimal> findByLocation(String location){
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM animals WHERE animallocation = :location";
+            return con.createQuery(sql)
+                    .addParameter("location", location)
                     .executeAndFetch(EndangeredAnimal.class);
         }
     }

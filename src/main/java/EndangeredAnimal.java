@@ -10,32 +10,33 @@ public class EndangeredAnimal extends Animal {
 
     private static final String DATABASE_TYPE = "endangered";
 
-    public EndangeredAnimal(String name, String age, String location, String healthStatus, int rangerId){
+    public EndangeredAnimal(String name, String age, String animalLocation, String healthStatus, int rangerId){
         this.name = name;
         this.age = age;
-        this.location = location;
+        this.animalLocation = animalLocation;
         this.healthStatus = healthStatus;
         this.rangerId = rangerId;
         timer = new Timer();
         type = DATABASE_TYPE;
-        this.located = false;
     }
-   public static List<EndangeredAnimal> all(){
+    public static List<EndangeredAnimal> all(){
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM animals WHERE type = 'endangered';";
             return con.createQuery(sql)
                     .throwOnMappingFailure(false)
                     .executeAndFetch(EndangeredAnimal.class);
         }
-   }
-   public static EndangeredAnimal find(int id){
+    }
+    public static EndangeredAnimal find(int id){
         try(Connection con = DB.sql2o.open()) {
             String sql = "SELECT * FROM animals WHERE id = :id";
-            EndangeredAnimal endangeredAnimal = con.createQuery(sql)
+            return con.createQuery(sql)
                     .addParameter("id", id)
                     .executeAndFetchFirst(EndangeredAnimal.class);
-            return endangeredAnimal;
         }
-   }
+    }
+
+
+
 
 }
