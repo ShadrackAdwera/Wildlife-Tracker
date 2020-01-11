@@ -1,4 +1,8 @@
+import org.sql2o.Connection;
+
+import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Timer;
 
 public abstract class Animal {
     protected String name;
@@ -7,6 +11,10 @@ public abstract class Animal {
     protected String location;
     protected String healthStatus;
     protected int rangerId;
+    protected Timestamp lastSeen;
+    protected Timer timer;
+    protected String type;
+
 
     public static final String HEALTH_ILL = "ill";
     public static final String HEALTH_HEALTHY = "healthy";
@@ -14,14 +22,6 @@ public abstract class Animal {
     public static final String AGE_YOUNG = "young";
     public static final String AGE_NEWBORN = "newborn";
     public static final String AGE_ADULT = "adult";
-
-//    public Animal(String name, String age, String location, String healthStatus, int rangerId){
-//        this.name = name;
-//        this.age = age;
-//        this.location = location;
-//        this.healthStatus = healthStatus;
-//        this.rangerId = rangerId;
-//    }
 
 
     @Override
@@ -100,4 +100,28 @@ public abstract class Animal {
     public int getRangerId() {
         return rangerId;
     }
-}
+
+   public void save(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "INSERT INTO animals (name, age, location, healthstatus, rangerid, lastseen, type) VALUES (:name, :age, :location, :healthstatus, :rangerid, now(), :type)";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("name", this.name)
+                    .addParameter("age", this.age)
+                    .addParameter("location", this.location)
+                    .addParameter("healthstatus", this.healthStatus)
+                    .addParameter("rangerid", this.rangerId)
+                    .addParameter("type", this.type)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+        public void delete() {
+            try(Connection con = DB.sql2o.open()) {
+                String sql = "DELETE FROM animals WHERE id = :id";
+                con.createQuery(sql)
+                        .addParameter("id", this.id)
+                        .executeUpdate();
+            }
+       }
+   }
+

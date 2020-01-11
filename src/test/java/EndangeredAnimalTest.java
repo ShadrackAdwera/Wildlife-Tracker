@@ -1,8 +1,12 @@
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class EndangeredAnimalTest {
+
+    @Rule
+    public DatabaseRule databaseRule = new DatabaseRule();
 
     @Test
     public void equals_returnsBothInstancesOfObject_true() {
@@ -65,6 +69,13 @@ public class EndangeredAnimalTest {
         EndangeredAnimal animal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
         animal.setAge(EndangeredAnimal.getAgeYoung());
         assertEquals("young", EndangeredAnimal.getAgeYoung());
+    }
+
+    @Test
+    public void save_entrySavesSuccessfullyToDatabase(){
+        EndangeredAnimal animal = new EndangeredAnimal("abc", "young","upper quad","okay", 1);
+        animal.save();
+        assertEquals(EndangeredAnimal.all().get(0), animal);
     }
 
 
