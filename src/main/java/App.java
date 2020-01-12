@@ -117,7 +117,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        //get: view an animal
+        //get: view an endangered animal
         get("/location/:locationId/animal/:animalId", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Sighting> sightings = Sighting.all();
