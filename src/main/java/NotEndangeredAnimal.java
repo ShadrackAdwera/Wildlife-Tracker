@@ -32,4 +32,5 @@ public class NotEndangeredAnimal extends Animal {
         }
     }
 
+
 }

@@ -135,8 +135,9 @@ public class App {
             model.put("sightings", Sighting.all());
             return new ModelAndView(model, "animal-detail.hbs");
         }, new HandlebarsTemplateEngine());
+
         //get: view not endangered animal
-        get("/location/:locationId/animal/:animalId", (request, response) -> {
+        get("/location/animal/:animalId", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             List<Sighting> sightings = Sighting.all();
             model.put("sighting", sightings);
@@ -146,10 +147,7 @@ public class App {
             model.put("not-endangered-animals", notEndangeredAnimals );
             int idAnimalToFind = Integer.parseInt(request.params("animalId"));
             NotEndangeredAnimal foundAnimal = NotEndangeredAnimal.find(idAnimalToFind);
-            int locationFound = Integer.parseInt(request.params("locationId"));
-            Sighting foundSite = Sighting.find(locationFound);
             model.put("not-endangered-animal", foundAnimal);
-            model.put("sighting", foundSite);
             model.put("sightings", Sighting.all());
             return new ModelAndView(model, "not-endangered-details.hbs");
         }, new HandlebarsTemplateEngine());
