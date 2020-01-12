@@ -82,6 +82,15 @@ public class Sighting {
                     .executeAndFetch(EndangeredAnimal.class);
         }
     }
+    //one to many relationship
+    public static List<NotEndangeredAnimal> findNotEndangeredByLocation(String location){
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM animals WHERE animallocation = :location";
+            return con.createQuery(sql)
+                    .addParameter("location", location)
+                    .executeAndFetch(NotEndangeredAnimal.class);
+        }
+    }
 
 }
 
