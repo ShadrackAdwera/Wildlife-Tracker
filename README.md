@@ -15,9 +15,10 @@ An animal abstract class has been used whereby endangered animals and those that
 * On ItelliJ, simply run the command **$ gradle run** and navigate to **localhost:4567** to view the website
 * A postgres database also needs to be [installed](https://www.2ndquadrant.com/en/blog/pginstaller-install-postgresql/)
 * Once installed, fire up the database by typing on the terminal **$ psql** and you can now create a [user with a password](https://www.postgresql.org/docs/8.0/sql-createuser.html) . Make sure to edit the DB.java file with the credentails created in order to connect to your database.
-* Once a user is created, create a database using the command: **user# CREATE DATABASE database_name;**
-* Then create tables to store animal details and sighting details **database_name# CREATE TABLE animals VALUES (enter your table_name columns)**
-* Create a table to store sighting details too.
+* Once a user is created, create a database using the command: **user# CREATE DATABASE wildlife_tracker;**
+* Then create tables to store animal details and sighting details **database_name# CREATE TABLE animals VALUES (id SERIAL PRIMARY KEY, name varchar, age varchar, animallocation varchar, healthstatus varchar, rangerId int, lastseen timer, type varchar) VALUES (:name, :age, :animallocation, :healthstatus, :rangerId, now(), :type);**
+* Create a table to store sighting details too **user# CREATE TABLE sighting (id SERIAL PRIMARY KEY, rangername, location) VALUES (:name, :location)**.
+* A development database should also be created **user# CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;**
 * Upon a successfull submission of a from, you can view the entiries in the tables through the sql command: **database_name# SELECT * FROM animals;**
 
 ## Behaviour driven design
