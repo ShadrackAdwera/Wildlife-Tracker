@@ -1,0 +1,19 @@
+{{#partial "content"}}
+    <div class = "row">
+        <div class="col-md-6">
+            <div class="card animated bounceInUp">
+                <img class="card-img-top img-responsive w-100" src="../../images/not-end.png" width="100%" height="auto" alt="Card image cap">
+                <div class="card-body">
+                    <h3 class="card-title"> Animal Name: {{animal.name}}</h3>
+                    <p class="card-text">Located At:  {{animal.animalLocation}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Age: {{animal.age}}</li>
+                    <li class="list-group-item">Health: {{animal.healthStatus}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+
+{{>layout.hbs}}
