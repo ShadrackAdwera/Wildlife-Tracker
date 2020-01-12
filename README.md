@@ -69,9 +69,9 @@ Wildlife Tracker
 
 ![view-location](src/main/resources/public/images/img6.png)
 
-* View of entries in postgres
+* View of entries in postgres, endangered animals or not 
 
-![view-location](src/main/resources/public/images/img7.png)
+![view-location](src/main/resources/public/images/db.png)
 
 * Check out the live link: 
 
