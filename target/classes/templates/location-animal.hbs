@@ -1,0 +1,39 @@
+{{#partial "content"}}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <img class="card-img-top img-responsive w-100"
+                     src="../../images/timon.png" width="100%" height="auto"
+                     alt="Card image cap">
+                <div class="animated fadeInDown">
+                    <div class="card-body">
+                        <h3 class="card-title"> Location: {{sights.location}}</h3>
+                        <h3 class="card-title"> Ranger In Charge: {{sights.rangerName}}</h3>
+                    </div>
+                    <h4>Animals Spotted: </h4>
+                    <div class="card-body">
+                        <ul>
+                            {{#if animals}}
+                                {{#each animals}}
+                                    <li>
+                                        <p><a href="/location/{{id}}/animal/{{id}}">{{name}}</a></p>
+                                    </li>
+                                {{/each}}
+                            {{else}}
+                                {{#if not-endangered-animals}}
+                                    {{#each not-endangered-animals}}
+                                        <li>
+                                            <p><a href="/location/animal/{{id}}">{{name}}</a></p>
+                                        </li>
+                                    {{/each}}
+                            {{/if}}
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+
+{{>layout.hbs}}

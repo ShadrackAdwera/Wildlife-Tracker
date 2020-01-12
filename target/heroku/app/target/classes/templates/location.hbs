@@ -1,0 +1,35 @@
+{{#partial "content"}}
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../../images/wooo.jpg" width="100%" height="auto" alt="woody">
+            </div>
+            <div class="col-md-6">
+                <h3>Add a Location</h3>
+                <br>
+                <div class="animated bounceInLeft">
+                    <form action="/location" method="post">
+                        <div class="form-group">
+                            <label for="name">Ranger Name</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Sighted Location</label>
+                            <input type="text" name="location" id="location" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addInfo">Additional Information</label>
+                            <textarea class="form-control" id="add-info" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-info">SUBMIT</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <h3>Add a location</h3>
+
+
+        <h5><a href="/">Go back</a></h5>
+{{/partial}}
+
+{{>layout.hbs}}

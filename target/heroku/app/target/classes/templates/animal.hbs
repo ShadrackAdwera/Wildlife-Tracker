@@ -1,0 +1,49 @@
+{{#partial "content"}}
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="/../images/ranger3.jpg" width="100%" height="auto" alt="ranger" class="animated bounceInUp">
+        </div>
+        <div class="animated zoomIn">
+            <div class="col-md-6">
+                <h3>Enter Spotted (Endangered Only!!!!) Animal Details</h3>
+                <p>Or Go to <a href="/not-endangered-animal/new">Not Endangered Animals</a></p>
+                <br>
+            <form action="/animal" method="post">
+                {{#if sightings}}
+                    <div class="form-group">
+                        <label for="name">Animal Name</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">AGE</label>
+                        <input type="text" name="age" id="age" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Health Status</label>
+                        <input type="text" name="healthStatus" id="healthStatus" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Location Spotted">Area Located: </label>
+                        <select id="animalLocation" name="animalLocation" class="form-control">
+                            {{#each sightings}}
+                                <option value="{{location}}">{{location}}</option>
+                            {{/each}}
+                        </select>
+                        <br>
+                        <button type="submit" class="btn btn-info">SUBMIT</button>
+                        <br>
+                        <p><a href="/location/new">Or, Add a Location</a></p>
+                    </div>
+                {{else}}
+                    <h3>But first, Add a <a href="/location/new">Location</a></h3>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+
+    </div>
+
+
+{{/partial}}
+{{>layout.hbs}}

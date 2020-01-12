@@ -69,11 +69,11 @@ Wildlife Tracker
 
 ![view-location](src/main/resources/public/images/img6.png)
 
-* View of entries in postgres, endangered animals or not 
+* View of entries in postgres, endangered animals or not
 
 ![view-location](src/main/resources/public/images/db.png)
 
-* Check out the live link: 
+* Check out the live link: <https://adwera-wildlife-tracker.herokuapp.com/>
 
 ## Routing
 

@@ -1,0 +1,80 @@
+{{#block "header"}}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+              integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/stylesheet.css"/>
+        <link rel="icon" href="https://montclairanimalhospital.com/wp-content/uploads/cropped-favicon-300x300.png" type="image/x-icon">
+        {{#block "title"}}<title>Wildlife Tracker</title>{{/block}}
+    </head>
+    <body>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation" class="dropdown show">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">
+                Location <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                {{#if sighting}}
+                    {{#each sighting}}
+                        <li><a href="/location/{{id}}">{{location}}</a></li>
+                    {{/each}}
+                    <li><a href="/location/new">Register Location</a></li>
+
+                {{else}}
+                    <li><a href="/location/new">Register Location</a></li>
+                {{/if}}
+            </ul>
+        <li role="presentation" class="dropdown show">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">
+                Endangered Animals <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                {{#if animals}}
+                    {{#each animals}}
+                        <li><a href="/location/{{id}}/animal/{{id}}">{{name}}</a></li>
+                    {{/each}}
+                    <li><a href="/animal/new">Register Animal</a></li>
+
+                {{else}}
+                    <li><a href="/animal/new">Register Animal</a></li>
+                {{/if}}
+            </ul>
+        <li role="presentation" class="dropdown show">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">
+                Not Endangered <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                {{#if not-endangered-animals}}
+                    {{#each not-endangered-animals}}
+                        <li><a href="/location/animal/{{id}}">{{name}}</a></li>
+                    {{/each}}
+                    <li><a href="not-endangered-animal/new">Register Animal</a></li>
+
+                {{else}}
+                    <li><a href="not-endangered-animal/new">Register Animal</a></li>
+                {{/if}}
+            </ul>
+    </ul>
+{{/block}}
+<div class="container">
+    {{#block "content"}}
+
+    {{/block}}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
