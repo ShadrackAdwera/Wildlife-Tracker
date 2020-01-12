@@ -10,17 +10,17 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
-    //    private static int getHerokuAssignedPort(){
-//        ProcessBuilder processBuilder = new ProcessBuilder();
-//        if (processBuilder.environment().get("PORT")!=null){
-//            return Integer.parseInt(processBuilder.environment().get("PORT"));
-//        } else {
-//            return 4567;
-//        }
-//    }
+        private static int getHerokuAssignedPort(){
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT")!=null){
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        } else {
+            return 4567;
+        }
+    }
     public static void main(String[]args){
         staticFileLocation("public");
-//        port(getHerokuAssignedPort());
+        port(getHerokuAssignedPort());
         get("/", (request, response) ->{
             Map<String, Object> model = new HashMap<>();
             List<Sighting> sightings = Sighting.all();
